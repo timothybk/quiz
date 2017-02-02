@@ -5,9 +5,9 @@
 <head>
     <title>quiz</title>
     <style type="text/css">
-    	body {
-    		background: #00BCD4
-    	}
+    body {
+        background: #00BCD4
+    }
     </style>
     <script src="jquery-3.1.1.min.js"></script>
     <script>
@@ -15,52 +15,54 @@
 
         var current = 0;
         var score = 0;
-        
+
 
         function populate(doAgain) {
             if (doAgain === true) {
                 $("p").text(questionArray[current].quest);
-                $("p").fadeIn(600)
-                $(".answers").empty()
+                $(".answers").empty();
+
                 for (var i in questionArray[current].choices) {
                     $(".answers").append("<tr><td>" + questionArray[current].choices[i] + "</td><td><input type='radio' name='answer' id=" + i + " /></td></tr>");
 
                 }
             } else {
-            	$("body").empty();
-            	$("p").fadeIn(600) //not working?
-            	$("body").append("<p>Your final score is " + score + "/3</p>");
+                $("body").empty();
+                $("body").append("<p>Your final score is " + score + "/3</p>");
 
             }
+            $("body").fadeIn(300);
 
         }
 
         populate(true);
 
         $("#nextButton").click(function() {
-	        if ($("input:checked").val()) {
-	        	$("p").fadeOut(3);    
-	            var selected = parseInt($("input:checked").attr("id"));
-	            var correct = questionArray[current].answer;
-	            if (selected === correct) {
-	                score++;
-	            }
+            if ($("input:checked").val()) {
+                $("body").fadeOut(300);
+                var selected = parseInt($("input:checked").attr("id"));
+                var correct = questionArray[current].answer;
+                if (selected === correct) {
+                    score++;
+                }
 
-	            if (current < questionArray.length - 1) {
+                if (current < questionArray.length - 1) {
 
-	                current++;
-	                populate(true);
-
-	                event.preventDefault();
-	            } else {
-	                populate(false);
-	                event.preventDefault();
-	            }
-	        }
-	        else{
-	        	alert("nothing has been checked!");
-	        	event.preventDefault();
-	        }
+                    current++;
+                    setTimeout(function() {
+                        populate(true);
+                    }, 300)
+                    event.preventDefault();
+                } else {
+                    setTimeout(function() {
+                        populate(false);
+                    }, 300)
+                    event.preventDefault();
+                }
+            } else {
+                alert("nothing has been checked!");
+                event.preventDefault();
+            }
 
         })
 
@@ -82,12 +84,12 @@
 
 
 
-    var q1Answers = ["pia", "dog", "fish", "brernard"];
+    var q1Answers = ["Pia", "dog", "fish", "brernard"];
     var q2Answers = ["silly", "stinky", "butt", "Amy"];
-    var q3Answers = ["phone", "comp", "tim", "mouse"];
+    var q3Answers = ["phone", "comp", "Tim", "mouse"];
 
-    var q1 = new Question("what is cats name?", q1Answers, 0);
-    var q2 = new Question("what is wifes name?", q2Answers, 3);
+    var q1 = new Question("what is our cats name?", q1Answers, 0);
+    var q2 = new Question("what is my wifes name?", q2Answers, 3);
     var q3 = new Question("what is my name?", q3Answers, 2);
 
     console.log(q1.choices.length);
