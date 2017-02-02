@@ -46,28 +46,32 @@
                     score++;
                 }
 
-                if (current < questionArray.length - 1) {
+                setTimeout(function() {
 
-                    current++;
-                    setTimeout(function() {
+                    if (current < questionArray.length - 1) {
+
+                        current++;
+
                         populate(true);
-                    }, 300)
-                    event.preventDefault();
-                } else {
-                    setTimeout(function() {
+
+                    } else {
+
                         populate(false);
-                    }, 300)
-                    event.preventDefault();
-                }
+
+
+                    }
+                }, 300)
             } else {
                 alert("nothing has been checked!");
                 event.preventDefault();
             }
 
+
+            event.preventDefault();
         })
 
         $("input").click(function() {
-            //console.log(parseInt($("input:checked").attr("id")));
+
         })
 
     }
